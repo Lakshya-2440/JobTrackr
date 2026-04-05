@@ -1,11 +1,13 @@
+import { useState } from 'react';
 import { DropResult } from '@hello-pangea/dnd';
-import { LayoutGrid } from 'lucide-react';
+import { LayoutGrid, MessageCircle } from 'lucide-react';
 import { KanbanBoard as KanbanBoardView } from '@/components/kanban/KanbanBoard';
 import { EditJobForm } from '@/components/forms/EditJobForm';
 import { JobDetailSlideOver } from '@/components/kanban/JobDetailSlideOver';
 import { PageWrapper } from '@/components/layout/PageWrapper';
 import { EmptyState } from '@/components/ui/EmptyState';
 import { ErrorState } from '@/components/ui/ErrorState';
+import { JobAssistantModal } from '@/components/ui/JobAssistantModal';
 import { LoadingScreen } from '@/components/ui/LoadingScreen';
 import { useJobs, useUpdateJobStatus } from '@/hooks/useJobs';
 import { useJobStore } from '@/store/jobStore';
@@ -13,6 +15,7 @@ import { useUiStore } from '@/store/uiStore';
 import { JobStatus } from '@/types';
 
 export const KanbanBoard = () => {
+  const [isAssistantOpen, setIsAssistantOpen] = useState(false);
   const { search, priority } = useJobStore();
   const openAddJob = useUiStore((state) => state.openAddJob);
   const jobsQuery = useJobs({
@@ -91,6 +94,17 @@ export const KanbanBoard = () => {
 
       <EditJobForm />
       <JobDetailSlideOver />
+
+      <button
+        type="button"
+        onClick={() => setIsAssistantOpen(true)}
+        className="fixed bottom-6 right-6 z-30 inline-flex h-14 w-14 items-center justify-center rounded-full bg-blue-600 text-white shadow-lg transition hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-400"
+        aria-label="Open application assistant"
+      >
+        <MessageCircle className="h-6 w-6" />
+      </button>
+
+      <JobAssistantModal isOpen={isAssistantOpen} onClose={() => setIsAssistantOpen(false)} />
     </PageWrapper>
   );
 };

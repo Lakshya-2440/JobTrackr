@@ -60,7 +60,7 @@ export const DashboardNavbar = ({ title }: NavbarProps) => {
           </label>
           <Button onClick={() => openAddJob()}>
             <Plus className="h-4 w-4" />
-            Add Job
+            Add Application
           </Button>
         </div>
       </div>

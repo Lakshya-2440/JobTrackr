@@ -1,5 +1,7 @@
-import { BriefcaseBusiness, FilePlus2, HandCoins, MessagesSquare } from 'lucide-react';
+import { useState } from 'react';
+import { BriefcaseBusiness, FilePlus2, HandCoins, MessageCircle, MessagesSquare } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { JobAssistantModal } from '@/components/ui/JobAssistantModal';
 import { PageWrapper } from '@/components/layout/PageWrapper';
 import { Button } from '@/components/ui/Button';
 import { EmptyState } from '@/components/ui/EmptyState';
@@ -15,6 +17,7 @@ import { Badge } from '@/components/ui/Badge';
 export const Dashboard = () => {
   const navigate = useNavigate();
   const openAddJob = useUiStore((state) => state.openAddJob);
+  const [isAssistantOpen, setIsAssistantOpen] = useState(false);
   const { search, status, priority } = useJobStore();
   const analyticsQuery = useAnalytics();
   const recentJobsQuery = useJobs({
@@ -132,12 +135,14 @@ export const Dashboard = () => {
 
       <button
         type="button"
-        onClick={() => openAddJob()}
+        onClick={() => setIsAssistantOpen(true)}
         className="fixed bottom-6 right-6 z-30 inline-flex h-14 w-14 items-center justify-center rounded-full bg-blue-600 text-white shadow-lg transition hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-400"
-        aria-label="Quick add job"
+        aria-label="Open application assistant"
       >
-        <FilePlus2 className="h-6 w-6" />
+        <MessageCircle className="h-6 w-6" />
       </button>
+
+      <JobAssistantModal isOpen={isAssistantOpen} onClose={() => setIsAssistantOpen(false)} />
     </PageWrapper>
   );
 };

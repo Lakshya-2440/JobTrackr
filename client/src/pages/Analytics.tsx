@@ -1,17 +1,20 @@
+import { useState } from 'react';
 import { differenceInCalendarDays } from 'date-fns';
-import { BarChart3, BriefcaseBusiness, HandCoins, MessagesSquare, Sparkles } from 'lucide-react';
+import { BarChart3, BriefcaseBusiness, HandCoins, MessageCircle, MessagesSquare, Sparkles } from 'lucide-react';
 import { ApplicationsOverTimeChart } from '@/components/charts/ApplicationsOverTimeChart';
 import { StatusPieChart } from '@/components/charts/StatusPieChart';
 import { PageWrapper } from '@/components/layout/PageWrapper';
 import { Button } from '@/components/ui/Button';
 import { EmptyState } from '@/components/ui/EmptyState';
 import { ErrorState } from '@/components/ui/ErrorState';
+import { JobAssistantModal } from '@/components/ui/JobAssistantModal';
 import { LoadingScreen } from '@/components/ui/LoadingScreen';
 import { StatCard } from '@/components/ui/StatCard';
 import { useAnalytics, useJobs } from '@/hooks/useJobs';
 import { useUiStore } from '@/store/uiStore';
 
 export const Analytics = () => {
+  const [isAssistantOpen, setIsAssistantOpen] = useState(false);
   const openAddJob = useUiStore((state) => state.openAddJob);
   const analyticsQuery = useAnalytics();
   const jobsQuery = useJobs({
@@ -118,6 +121,17 @@ export const Analytics = () => {
           </div>
         </div>
       )}
+
+      <button
+        type="button"
+        onClick={() => setIsAssistantOpen(true)}
+        className="fixed bottom-6 right-6 z-30 inline-flex h-14 w-14 items-center justify-center rounded-full bg-blue-600 text-white shadow-lg transition hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-400"
+        aria-label="Open application assistant"
+      >
+        <MessageCircle className="h-6 w-6" />
+      </button>
+
+      <JobAssistantModal isOpen={isAssistantOpen} onClose={() => setIsAssistantOpen(false)} />
     </PageWrapper>
   );
 };
