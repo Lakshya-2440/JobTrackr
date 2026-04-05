@@ -20,7 +20,7 @@ export const useAuthStore = create<AuthState>()(
       clearAuth: () => set({ user: null, accessToken: null })
     }),
     {
-      name: 'job-tracker-auth',
+      name: 'jobtrackr-auth',
       storage: createJSONStorage(() => sessionStorage),
       partialize: (state) => ({
         user: state.user,

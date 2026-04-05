@@ -61,13 +61,13 @@ export const Dashboard = () => {
           </div>
         )}
 
-        <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-900">
+        <section className="rounded-2xl border border-slate-700 bg-slate-900 p-5 shadow-sm">
           <div className="mb-5 flex items-center justify-between gap-3">
             <div>
-              <h2 className="text-lg font-semibold text-slate-900 dark:text-white">
+              <h2 className="text-lg font-semibold text-white">
                 Recent Applications
               </h2>
-              <p className="text-sm text-slate-500 dark:text-slate-400">
+              <p className="text-sm text-slate-400">
                 Your five most recently added opportunities.
               </p>
             </div>
@@ -89,9 +89,9 @@ export const Dashboard = () => {
             />
           ) : (
             <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-slate-200 text-sm dark:divide-slate-800">
+              <table className="min-w-full divide-y divide-slate-800 text-sm">
                 <thead>
-                  <tr className="text-left text-slate-500 dark:text-slate-400">
+                  <tr className="text-left text-slate-400">
                     <th className="pb-3 pr-4 font-semibold">Company</th>
                     <th className="pb-3 pr-4 font-semibold">Position</th>
                     <th className="pb-3 pr-4 font-semibold">Status</th>
@@ -99,17 +99,17 @@ export const Dashboard = () => {
                     <th className="pb-3 font-semibold">Date Added</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-200 dark:divide-slate-800">
+                <tbody className="divide-y divide-slate-800">
                   {recentJobsQuery.data.jobs.map((job) => (
                     <tr
                       key={job.id}
-                      className="cursor-pointer transition hover:bg-slate-50 dark:hover:bg-slate-800/50"
+                      className="cursor-pointer transition hover:bg-slate-800/50"
                       onClick={() => navigate(`/jobs/${job.id}`)}
                     >
-                      <td className="py-4 pr-4 font-semibold text-slate-900 dark:text-white">
+                      <td className="py-4 pr-4 font-semibold text-white">
                         {job.company}
                       </td>
-                      <td className="py-4 pr-4 text-slate-600 dark:text-slate-300">
+                      <td className="py-4 pr-4 text-slate-300">
                         {job.position}
                       </td>
                       <td className="py-4 pr-4">

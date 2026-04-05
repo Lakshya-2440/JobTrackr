@@ -1,6 +1,6 @@
-# Job Tracker
+# JobTrackr
 
-A production-ready full-stack job application tracker built with React, Node.js, Express, Prisma, and Neon PostgreSQL. The app helps users manage a job search with a Kanban pipeline, secure authentication, resume uploads, reminders, and analytics for application progress.
+A production-ready full-stack job application tracker built with React, Node.js, Express, Prisma, and Neon PostgreSQL. JobTrackr helps users manage a job search with a Kanban pipeline, secure authentication, resume uploads, reminders, and analytics for application progress.
 
 ## Screenshots
 
@@ -56,7 +56,7 @@ Add your screenshots here after running the app locally:
 
 ```bash
 git clone <your-repo-url>
-cd job_tracker
+cd jobtrackr
 ```
 
 ### 2. Install dependencies
@@ -212,7 +212,7 @@ All error responses use:
 ## Folder Structure
 
 ```text
-job-tracker/
+jobtrackr/
 ├── client/
 │   ├── public/
 │   ├── src/

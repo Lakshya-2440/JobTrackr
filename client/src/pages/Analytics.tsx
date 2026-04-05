@@ -71,11 +71,11 @@ export const Analytics = () => {
           </div>
 
           <div className="grid gap-6 xl:grid-cols-2">
-            <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-900">
-              <h2 className="text-lg font-semibold text-slate-900 dark:text-white">
+            <section className="rounded-2xl border border-slate-700 bg-slate-900 p-5 shadow-sm">
+              <h2 className="text-lg font-semibold text-white">
                 Applications by Status
               </h2>
-              <p className="text-sm text-slate-500 dark:text-slate-400">
+              <p className="text-sm text-slate-400">
                 See how your pipeline is distributed right now.
               </p>
               <StatusPieChart
@@ -84,11 +84,11 @@ export const Analytics = () => {
               />
             </section>
 
-            <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-900">
-              <h2 className="text-lg font-semibold text-slate-900 dark:text-white">
+            <section className="rounded-2xl border border-slate-700 bg-slate-900 p-5 shadow-sm">
+              <h2 className="text-lg font-semibold text-white">
                 Applications Over Time
               </h2>
-              <p className="text-sm text-slate-500 dark:text-slate-400">
+              <p className="text-sm text-slate-400">
                 Your momentum across the last six months.
               </p>
               <ApplicationsOverTimeChart data={analytics.applicationsByMonth} />
@@ -96,22 +96,22 @@ export const Analytics = () => {
           </div>
 
           <div className="grid gap-4 md:grid-cols-2">
-            <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-900">
-              <p className="text-sm font-medium text-slate-500 dark:text-slate-400">Response Rate</p>
-              <p className="mt-3 text-4xl font-bold tracking-tight text-slate-900 dark:text-white">
+            <section className="rounded-2xl border border-slate-700 bg-slate-900 p-5 shadow-sm">
+              <p className="text-sm font-medium text-slate-400">Response Rate</p>
+              <p className="mt-3 text-4xl font-bold tracking-tight text-white">
                 {analytics.responseRate}%
               </p>
-              <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
+              <p className="mt-2 text-sm text-slate-400">
                 Of applications that got a response.
               </p>
             </section>
 
-            <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-900">
-              <p className="text-sm font-medium text-slate-500 dark:text-slate-400">Average Time</p>
-              <p className="mt-3 text-4xl font-bold tracking-tight text-slate-900 dark:text-white">
+            <section className="rounded-2xl border border-slate-700 bg-slate-900 p-5 shadow-sm">
+              <p className="text-sm font-medium text-slate-400">Average Time</p>
+              <p className="mt-3 text-4xl font-bold tracking-tight text-white">
                 {averageTime !== null ? `${averageTime}d` : 'N/A'}
               </p>
-              <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
+              <p className="mt-2 text-sm text-slate-400">
                 Days between logging the role and marking it as applied.
               </p>
             </section>

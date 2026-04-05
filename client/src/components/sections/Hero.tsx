@@ -55,7 +55,7 @@ export const Hero = () => (
           </motion.h1>
 
           <motion.p variants={item} className="mt-7 max-w-xl text-lg leading-8 text-slate-300">
-            Trackr organizes every application, interview, and follow-up in one intelligent board
+            JobTrackr organizes every application, interview, and follow-up in one intelligent board
             so you can focus on landing the job, not managing spreadsheets.
           </motion.p>
 

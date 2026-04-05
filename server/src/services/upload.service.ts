@@ -14,8 +14,9 @@ export const uploadService = {
       const stream = cloudinary.uploader.upload_stream(
         {
           resource_type: 'raw',
-          folder: 'job-tracker/resumes',
+          folder: 'jobtrackr/resumes',
           public_id: `${userId}_${Date.now()}`,
+
           overwrite: true
         },
         (error, result) => {

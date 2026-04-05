@@ -24,7 +24,7 @@ export const ConfirmDialog = ({
 }: ConfirmDialogProps) => (
   <Modal isOpen={isOpen} onClose={onClose} title={title} size="sm">
     <div className="space-y-6">
-      <p className="text-sm leading-6 text-slate-600 dark:text-slate-300">{description}</p>
+      <p className="text-sm leading-6 text-slate-300">{description}</p>
       <div className="flex justify-end gap-3">
         <Button variant="secondary" onClick={onClose} disabled={loading}>
           {cancelLabel}

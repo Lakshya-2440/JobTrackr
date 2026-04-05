@@ -8,7 +8,7 @@ interface PageWrapperProps extends PropsWithChildren {
 }
 
 export const PageWrapper = ({ title, children }: PageWrapperProps) => (
-  <div className="min-h-screen bg-slate-50 dark:bg-slate-950">
+  <div className="min-h-screen bg-[#090909] text-white">
     <Sidebar />
     <div className="lg:pl-72">
       <DashboardNavbar title={title} />

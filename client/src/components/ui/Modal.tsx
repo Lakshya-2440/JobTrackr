@@ -54,16 +54,16 @@ export const Modal = ({
       />
       <div
         className={cn(
-          'relative z-10 w-full rounded-2xl border border-slate-200 bg-white shadow-soft transition-all dark:border-slate-700 dark:bg-slate-900',
+          'relative z-10 w-full rounded-2xl border border-slate-700 bg-slate-900 shadow-soft transition-all',
           sizeClasses[size]
         )}
       >
-        <div className="flex items-center justify-between border-b border-slate-200 px-5 py-4 dark:border-slate-800">
-          <h2 className="text-lg font-semibold text-slate-900 dark:text-white">{title}</h2>
+        <div className="flex items-center justify-between border-b border-slate-800 px-5 py-4">
+          <h2 className="text-lg font-semibold text-white">{title}</h2>
           <button
             type="button"
             onClick={onClose}
-            className="rounded-full p-2 text-slate-500 transition hover:bg-slate-100 hover:text-slate-700 dark:hover:bg-slate-800 dark:hover:text-slate-200"
+            className="rounded-full p-2 text-slate-400 transition hover:bg-slate-900 hover:text-slate-200"
             aria-label="Close modal"
           >
             <X className="h-5 w-5" />

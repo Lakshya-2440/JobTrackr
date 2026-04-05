@@ -13,11 +13,11 @@ const variantClasses: Record<NonNullable<ButtonProps['variant']>, string> = {
   primary:
     'border border-indigo-400/40 bg-indigo-500 text-white shadow-[0_16px_40px_-20px_rgba(99,102,241,0.95)] hover:border-indigo-300 hover:bg-indigo-400 focus-visible:ring-indigo-400',
   secondary:
-    'bg-slate-100 text-slate-900 hover:bg-slate-200 focus-visible:ring-slate-400 dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700',
+    'bg-slate-800 text-slate-100 hover:bg-slate-700 focus-visible:ring-slate-400',
   danger:
-    'bg-rose-600 text-white hover:bg-rose-700 focus-visible:ring-rose-500 dark:bg-rose-500 dark:hover:bg-rose-400',
+    'bg-rose-600 text-white hover:bg-rose-700 focus-visible:ring-rose-500',
   ghost:
-    'bg-transparent text-slate-700 hover:bg-slate-100 focus-visible:ring-slate-400 dark:text-slate-200 dark:hover:bg-slate-800',
+    'bg-transparent text-slate-200 hover:bg-slate-900 focus-visible:ring-slate-400',
   outline:
     'border border-white/12 bg-white/[0.02] text-white hover:border-white/18 hover:bg-white/[0.06] focus-visible:ring-indigo-400',
   glass:
@@ -38,7 +38,7 @@ export const buttonStyles = ({
   className
 }: Pick<ButtonProps, 'variant' | 'size' | 'fullWidth' | 'className'> = {}) =>
   cn(
-    'inline-flex items-center justify-center gap-2 rounded-xl font-medium transition duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-60 dark:focus-visible:ring-offset-slate-950',
+    'inline-flex items-center justify-center gap-2 rounded-xl font-medium transition duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 disabled:pointer-events-none disabled:opacity-60',
     variantClasses[variant],
     sizeClasses[size],
     fullWidth && 'w-full',

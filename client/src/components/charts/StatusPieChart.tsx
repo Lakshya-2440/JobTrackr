@@ -55,12 +55,12 @@ export const StatusPieChart = ({ byStatus, totalApplications }: StatusPieChartPr
                   : ((item.value / totalApplications) * 100).toFixed(1);
 
               return (
-                <div className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm shadow-lg dark:border-slate-700 dark:bg-slate-900">
-                  <p className="font-semibold text-slate-900 dark:text-white">{item.name}</p>
-                  <p className="mt-1 text-slate-600 dark:text-slate-300">
+                <div className="rounded-xl border border-slate-700 bg-slate-900 px-4 py-3 text-sm shadow-lg">
+                  <p className="font-semibold text-white">{item.name}</p>
+                  <p className="mt-1 text-slate-300">
                     {item.value} applications
                   </p>
-                  <p className="text-slate-500 dark:text-slate-400">{percentage}% of total</p>
+                  <p className="text-slate-400">{percentage}% of total</p>
                 </div>
               );
             }}

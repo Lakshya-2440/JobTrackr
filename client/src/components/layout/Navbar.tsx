@@ -54,9 +54,9 @@ export const Navbar = () => {
           <Link
             to="/"
             className="inline-flex items-center gap-2 text-lg font-semibold tracking-tight text-white"
-            aria-label="Trackr home"
+            aria-label="JobTrackr home"
           >
-            <span className="font-display text-2xl tracking-[-0.06em] text-white">Trackr</span>
+            <span className="font-display text-2xl tracking-[-0.06em] text-white">JobTrackr</span>
             <motion.span
               aria-hidden="true"
               className="h-2.5 w-2.5 rounded-full bg-cyan-400 shadow-[0_0_24px_rgba(34,211,238,0.85)]"

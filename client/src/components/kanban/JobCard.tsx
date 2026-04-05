@@ -32,17 +32,17 @@ export const JobCard = ({ job }: JobCardProps) => {
           }
         }}
         className={cn(
-          'group rounded-2xl border border-slate-200 bg-white p-4 text-left shadow-sm transition hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-soft dark:border-slate-700 dark:bg-slate-900 dark:hover:border-slate-600',
+          'group rounded-2xl border border-slate-700 bg-slate-900 p-4 text-left shadow-sm transition hover:-translate-y-0.5 hover:border-slate-600 hover:shadow-soft',
           'border-l-4',
           STATUS_BORDER_CLASSES[job.status]
         )}
       >
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0">
-            <h3 className="truncate text-sm font-semibold text-slate-900 dark:text-white">
+            <h3 className="truncate text-sm font-semibold text-white">
               {job.company}
             </h3>
-            <p className="truncate text-sm text-slate-500 dark:text-slate-400">{job.position}</p>
+            <p className="truncate text-sm text-slate-400">{job.position}</p>
           </div>
 
           <div className="flex items-center gap-1 opacity-0 transition group-hover:opacity-100">
@@ -52,7 +52,7 @@ export const JobCard = ({ job }: JobCardProps) => {
                 event.stopPropagation();
                 openEditJob(job.id);
               }}
-              className="rounded-full p-2 text-slate-400 transition hover:bg-slate-100 hover:text-slate-700 dark:hover:bg-slate-800 dark:hover:text-slate-200"
+              className="rounded-full p-2 text-slate-400 transition hover:bg-slate-800 hover:text-slate-200"
               aria-label="Edit job"
             >
               <Pencil className="h-4 w-4" />
@@ -63,7 +63,7 @@ export const JobCard = ({ job }: JobCardProps) => {
                 event.stopPropagation();
                 setIsConfirmOpen(true);
               }}
-              className="rounded-full p-2 text-slate-400 transition hover:bg-rose-50 hover:text-rose-600 dark:hover:bg-rose-950/40 dark:hover:text-rose-300"
+              className="rounded-full p-2 text-slate-400 transition hover:bg-rose-950/40 hover:text-rose-300"
               aria-label="Delete job"
             >
               <Trash2 className="h-4 w-4" />
