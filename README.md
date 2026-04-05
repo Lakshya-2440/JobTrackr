@@ -259,6 +259,7 @@ jobtrackr/
 - Prisma + Neon PostgreSQL integration with pooled and direct URLs
 - Protected Express APIs with validation, rate limiting, and centralized errors
 - Drag-and-drop Kanban workflow for application stages
+- Basic in-app RAG assistant popup that answers application questions by status/priority
 - Resume upload pipeline using Multer and Cloudinary
 - Dashboard and analytics views with charts and response-rate insights
 - Zustand + React Query state management
