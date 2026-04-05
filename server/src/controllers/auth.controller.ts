@@ -5,7 +5,8 @@ import { ApiError } from '../utils/ApiError';
 
 const refreshCookieOptions: CookieOptions = {
   httpOnly: true,
-  sameSite: 'strict',
+  // Cross-site frontend (e.g. Vercel) → API (e.g. Render) requires None + Secure
+  sameSite: env.NODE_ENV === 'production' ? 'none' : 'strict',
   secure: env.NODE_ENV === 'production',
   maxAge: 30 * 24 * 60 * 60 * 1000
 };

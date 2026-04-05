@@ -18,7 +18,19 @@ const envSchema = z.object({
   CLOUDINARY_CLOUD_NAME: z.string().min(1, 'CLOUDINARY_CLOUD_NAME is required'),
   CLOUDINARY_API_KEY: z.string().min(1, 'CLOUDINARY_API_KEY is required'),
   CLOUDINARY_API_SECRET: z.string().min(1, 'CLOUDINARY_API_SECRET is required'),
-  CLIENT_URL: z.string().url('CLIENT_URL must be a valid URL'),
+  CLIENT_URL: z
+    .string()
+    .min(1)
+    .refine(
+      (val) => {
+        const parts = val.split(',').map((s) => s.trim()).filter(Boolean);
+        return (
+          parts.length > 0 &&
+          parts.every((origin) => z.string().url().safeParse(origin).success)
+        );
+      },
+      { message: 'CLIENT_URL must be one or more comma-separated valid URLs' }
+    ),
   NODE_ENV: z.enum(['development', 'production', 'test']).default('development')
 });
 
@@ -30,4 +42,8 @@ if (!parsedEnv.success) {
 }
 
 export const env = parsedEnv.data;
+
+export const clientOrigins = env.CLIENT_URL.split(',')
+  .map((s) => s.trim())
+  .filter(Boolean);
 

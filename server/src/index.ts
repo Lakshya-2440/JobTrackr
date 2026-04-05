@@ -4,7 +4,7 @@ import express from 'express';
 import rateLimit from 'express-rate-limit';
 import helmet from 'helmet';
 import morgan from 'morgan';
-import { env } from './config/env';
+import { clientOrigins, env } from './config/env';
 import { prisma } from './config/prisma';
 import { errorHandler } from './middleware/error.middleware';
 import authRoutes from './routes/auth.routes';
@@ -14,10 +14,12 @@ import { ApiError } from './utils/ApiError';
 
 const app = express();
 
+app.set('trust proxy', 1);
+
 app.use(helmet());
 app.use(
   cors({
-    origin: env.CLIENT_URL,
+    origin: clientOrigins.length === 1 ? clientOrigins[0] : clientOrigins,
     credentials: true
   })
 );
@@ -37,6 +39,10 @@ const authLimiter = rateLimit({
       message: 'Too many authentication requests, please try again later'
     });
   }
+});
+
+app.get('/api/health', (_req, res) => {
+  res.status(200).json({ ok: true });
 });
 
 app.use('/api/auth', authLimiter, authRoutes);
