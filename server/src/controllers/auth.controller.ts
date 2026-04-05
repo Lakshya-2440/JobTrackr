@@ -1,4 +1,5 @@
-import { CookieOptions, Request, Response } from 'express';
+import { Request, Response } from 'express';
+import type { CookieOptions } from 'express-serve-static-core';
 import { env } from '../config/env';
 import { authService } from '../services/auth.service';
 import { ApiError } from '../utils/ApiError';
