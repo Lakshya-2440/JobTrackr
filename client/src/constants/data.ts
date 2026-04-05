@@ -87,7 +87,6 @@ export interface ChangelogItem {
 export const NAV_LINKS: NavLinkItem[] = [
   { href: '#features', label: 'Features' },
   { href: '#how-it-works', label: 'How it Works' },
-  { href: '#pricing', label: 'Pricing' },
   { href: '#changelog', label: 'Changelog' }
 ];
 

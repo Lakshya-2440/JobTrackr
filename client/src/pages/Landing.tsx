@@ -20,9 +20,6 @@ const Stats = lazy(() =>
 const Testimonials = lazy(() =>
   import('@/components/sections/Testimonials').then((module) => ({ default: module.Testimonials }))
 );
-const Pricing = lazy(() =>
-  import('@/components/sections/Pricing').then((module) => ({ default: module.Pricing }))
-);
 const FinalCTA = lazy(() =>
   import('@/components/sections/FinalCTA').then((module) => ({ default: module.FinalCTA }))
 );
@@ -79,7 +76,6 @@ export const Landing = () => (
       <DeferredSection component={HowItWorks} fallbackHeight="h-[32rem]" sectionId="how-it-works" />
       <DeferredSection component={Stats} fallbackHeight="h-[18rem]" sectionId="stats" />
       <DeferredSection component={Testimonials} fallbackHeight="h-[28rem]" sectionId="testimonials" />
-      <DeferredSection component={Pricing} fallbackHeight="h-[42rem]" sectionId="pricing" />
       <DeferredSection component={FinalCTA} fallbackHeight="h-[22rem]" sectionId="final-cta" />
     </main>
     <Footer />
