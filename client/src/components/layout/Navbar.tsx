@@ -59,12 +59,6 @@ export const Navbar = () => {
           >
             <img src={logo} alt="JobTrackr" className="h-9 w-auto" />
             <span className="font-display text-xl">JobTrackr</span>
-            <motion.span
-              aria-hidden="true"
-              className="h-2.5 w-2.5 rounded-full bg-cyan-400 shadow-[0_0_24px_rgba(34,211,238,0.85)]"
-              animate={{ scale: [1, 1.18, 1], opacity: [0.55, 1, 0.55] }}
-              transition={{ duration: 2.1, repeat: Number.POSITIVE_INFINITY, ease: 'easeInOut' }}
-            />
           </Link>
 
           <nav className="hidden items-center gap-8 lg:flex">
