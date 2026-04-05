@@ -8,7 +8,7 @@ dotenv.config({ path: path.resolve(process.cwd(), '../.env') });
 const envSchema = z.object({
   PORT: z.coerce.number().int().positive().default(5000),
   DATABASE_URL: z.string().min(1, 'DATABASE_URL is required'),
-  DIRECT_URL: z.string().min(1).optional(),
+  DIRECT_URL: z.string().min(1, 'DIRECT_URL is required'),
   JWT_SECRET: z.string().min(32, 'JWT_SECRET must be at least 32 characters'),
   JWT_EXPIRES_IN: z.string().min(1, 'JWT_EXPIRES_IN is required'),
   JWT_REFRESH_SECRET: z
@@ -42,10 +42,6 @@ if (!parsedEnv.success) {
 }
 
 export const env = parsedEnv.data;
-
-if (!env.DIRECT_URL) {
-  env.DIRECT_URL = env.DATABASE_URL;
-}
 
 export const clientOrigins = env.CLIENT_URL.split(',')
   .map((s) => s.trim())
