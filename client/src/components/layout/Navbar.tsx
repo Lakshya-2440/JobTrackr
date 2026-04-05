@@ -66,6 +66,8 @@ export const Navbar = () => {
               <a
                 key={item.href}
                 href={item.href}
+                target={item.href.startsWith('http') ? '_blank' : undefined}
+                rel={item.href.startsWith('http') ? 'noreferrer' : undefined}
                 className="text-sm text-slate-300 transition hover:text-white focus-visible:text-white"
               >
                 {item.label}
@@ -116,6 +118,8 @@ export const Navbar = () => {
                     <a
                       key={item.href}
                       href={item.href}
+                      target={item.href.startsWith('http') ? '_blank' : undefined}
+                      rel={item.href.startsWith('http') ? 'noreferrer' : undefined}
                       onClick={() => setIsMenuOpen(false)}
                       className="block rounded-2xl px-4 py-3 text-sm text-slate-200 transition hover:bg-white/[0.06] hover:text-white"
                     >

@@ -24,7 +24,7 @@ const item = {
 };
 
 export const Hero = () => (
-  <section className="noise-overlay relative overflow-hidden pt-32 sm:pt-36 lg:min-h-screen lg:pt-40">
+  <section className="noise-overlay relative pt-32 pb-14 sm:pt-36 sm:pb-16 lg:min-h-screen lg:pt-40 lg:pb-24">
     <div className="absolute inset-0 bg-hero-bloom" aria-hidden="true" />
     <div className="absolute inset-0 grid-dots opacity-35" aria-hidden="true" />
     <div className="absolute left-[8%] top-28 h-56 w-56 rounded-full bg-indigo-500/20 blur-[120px]" />
@@ -101,27 +101,13 @@ export const Hero = () => (
           className="relative"
           style={{ willChange: 'transform' }}
         >
-          <motion.div
-            animate={{ y: [0, -9, 0] }}
-            transition={{ duration: 8, repeat: Number.POSITIVE_INFINITY, ease: 'easeInOut' }}
-            className="absolute -left-3 top-10 hidden rounded-[24px] border border-white/10 bg-white/[0.05] px-4 py-3 text-sm text-slate-200 shadow-glow backdrop-blur-xl lg:block"
-          >
-            3 interviews scheduled this week
-          </motion.div>
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 7.4, repeat: Number.POSITIVE_INFINITY, ease: 'easeInOut' }}
-            className="absolute -right-3 bottom-10 hidden rounded-[24px] border border-white/10 bg-white/[0.05] px-4 py-3 text-sm text-slate-200 shadow-[0_20px_60px_-40px_rgba(34,211,238,0.95)] backdrop-blur-xl lg:block"
-          >
-            Follow-up streak: 11 sent
-          </motion.div>
           <KanbanMockup />
         </motion.div>
       </div>
     </div>
 
     <div
-      className="pointer-events-none absolute inset-x-0 bottom-[-2px] h-24 bg-gradient-to-b from-transparent via-indigo-500/5 to-[#090909]"
+      className="pointer-events-none absolute inset-x-0 bottom-[-4px] h-44 bg-gradient-to-b from-transparent via-indigo-500/12 to-[#090909]"
       aria-hidden="true"
     />
   </section>

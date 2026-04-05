@@ -87,7 +87,8 @@ export interface ChangelogItem {
 export const NAV_LINKS: NavLinkItem[] = [
   { href: '#features', label: 'Features' },
   { href: '#how-it-works', label: 'How it Works' },
-  { href: '#changelog', label: 'Changelog' }
+  { href: '#changelog', label: 'Changelog' },
+  { href: 'https://www.linkedin.com/in/lakshyaa/', label: 'Contact' }
 ];
 
 export const LOGO_NAMES = ['Google', 'Meta', 'Amazon', 'Stripe', 'Notion', 'Figma'] as const;
@@ -314,31 +315,21 @@ export const FOOTER_LINK_GROUPS: FooterLinkGroup[] = [
     title: 'Product',
     links: [
       { label: 'Features', href: '#features' },
+      { label: 'How it Works', href: '#how-it-works' },
       { label: 'Changelog', href: '#changelog' }
     ]
   },
   {
-    title: 'Company',
+    title: 'Support',
     links: [
-      { label: 'About', href: '#how-it-works' },
-      { label: 'Careers', href: '#final-cta' },
-      { label: 'Contact', href: 'mailto:hello@trackr.app' }
+      { label: 'Contact', href: 'https://www.linkedin.com/in/lakshyaa/' }
     ]
   },
   {
     title: 'Resources',
     links: [
       { label: 'Login', href: '/login' },
-      { label: 'Register', href: '/register' },
-      { label: 'API Status', href: '#stats' }
-    ]
-  },
-  {
-    title: 'Legal',
-    links: [
-      { label: 'Privacy', href: '#footer' },
-      { label: 'Terms', href: '#footer' },
-      { label: 'Security', href: '#footer' }
+      { label: 'Register', href: '/register' }
     ]
   }
 ];

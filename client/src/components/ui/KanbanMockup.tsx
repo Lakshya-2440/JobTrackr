@@ -69,7 +69,11 @@ export const KanbanMockup = () => (
                       duration: 0.6,
                       ease: [0.22, 1, 0.36, 1]
                     }}
-                    whileHover={{ y: -6, scale: 1.01 }}
+                    whileHover={{
+                      y: -8,
+                      scale: 1.018,
+                      transition: { duration: 0.12, ease: 'easeOut' }
+                    }}
                     className="rounded-[22px] border border-white/8 bg-[#0f1016] p-4 shadow-[0_18px_42px_-28px_rgba(15,23,42,0.95)] transition"
                     style={{ willChange: 'transform' }}
                   >

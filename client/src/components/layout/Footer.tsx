@@ -1,11 +1,12 @@
-import { Github, Linkedin, MoveUpRight, Twitter } from 'lucide-react';
+import { Github, Globe, Instagram, Linkedin, MoveUpRight } from 'lucide-react';
 import logo from '@/assets/logo.svg';
 import { FOOTER_LINK_GROUPS } from '@/constants/data';
 
 const SOCIAL_LINKS = [
-  { label: 'Twitter', href: 'https://twitter.com', icon: Twitter },
-  { label: 'GitHub', href: 'https://github.com', icon: Github },
-  { label: 'LinkedIn', href: 'https://linkedin.com', icon: Linkedin }
+  { label: 'GitHub', href: 'https://github.com/Lakshya-2440', icon: Github },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/lakshyaa/', icon: Linkedin },
+  { label: 'Instagram', href: 'https://www.instagram.com/la7shya/', icon: Instagram },
+  { label: 'Portfolio', href: 'https://lakshyapf.vercel.app/', icon: Globe }
 ] as const;
 
 export const Footer = () => (
@@ -34,10 +35,14 @@ export const Footer = () => (
                   <li key={link.label}>
                     <a
                       href={link.href}
+                      target={link.href.startsWith('http') ? '_blank' : undefined}
+                      rel={link.href.startsWith('http') ? 'noreferrer' : undefined}
                       className="inline-flex items-center gap-2 text-sm text-slate-300 transition hover:text-white"
                     >
                       {link.label}
-                      {link.href.startsWith('mailto') ? <MoveUpRight className="h-3.5 w-3.5" /> : null}
+                      {link.href.startsWith('mailto') || link.href.startsWith('http') ? (
+                        <MoveUpRight className="h-3.5 w-3.5" />
+                      ) : null}
                     </a>
                   </li>
                 ))}
@@ -57,6 +62,8 @@ export const Footer = () => (
             <a
               key={label}
               href={href}
+              target="_blank"
+              rel="noreferrer"
               aria-label={label}
               className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-slate-300 transition hover:border-white/20 hover:bg-white/[0.08] hover:text-white"
             >
