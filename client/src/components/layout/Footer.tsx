@@ -1,4 +1,5 @@
 import { Github, Linkedin, MoveUpRight, Twitter } from 'lucide-react';
+import logo from '@/assets/logo.svg';
 import { FOOTER_LINK_GROUPS } from '@/constants/data';
 
 const SOCIAL_LINKS = [
@@ -12,12 +13,13 @@ export const Footer = () => (
     <div className="section-container">
       <div className="grid gap-12 lg:grid-cols-[1.2fr_2fr]">
         <div>
-          <div className="inline-flex items-center gap-2">
-            <span className="font-display text-3xl tracking-[-0.06em] text-white">Trackr</span>
+          <div className="flex items-center gap-2.5">
+            <img src={logo} alt="JobTrackr" className="h-9 w-auto" />
+            <span className="font-display text-2xl text-white">JobTrackr</span>
             <span className="h-2.5 w-2.5 rounded-full bg-cyan-400 shadow-[0_0_24px_rgba(34,211,238,0.85)]" />
           </div>
           <p className="mt-4 max-w-sm text-sm leading-7 text-slate-400">
-            Trackr gives job seekers a calm, high-signal command center for every application,
+            JobTrackr gives job seekers a calm, high-signal command center for every application,
             interview, and follow-up.
           </p>
         </div>
@@ -48,7 +50,7 @@ export const Footer = () => (
 
       <div className="mt-12 flex flex-col gap-6 border-t border-white/8 pt-6 text-sm text-slate-400 md:flex-row md:items-center md:justify-between">
         <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-3">
-          <span>© 2026 Trackr. All rights reserved.</span>
+          <span>© 2026 JobTrackr. All rights reserved.</span>
           <span className="hidden text-slate-700 sm:inline">•</span>
           <span>Built with ♥ for job seekers</span>
         </div>
