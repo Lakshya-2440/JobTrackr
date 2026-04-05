@@ -54,10 +54,11 @@ export const Navbar = () => {
         >
           <Link
             to="/"
-            className="inline-flex items-center gap-2 text-lg font-semibold tracking-tight text-white"
+            className="inline-flex items-center gap-2.5 text-lg font-semibold tracking-tight text-white"
             aria-label="JobTrackr home"
           >
             <img src={logo} alt="JobTrackr" className="h-8 w-auto" />
+            <span className="font-display text-xl">JobTrackr</span>
             <motion.span
               aria-hidden="true"
               className="h-2.5 w-2.5 rounded-full bg-cyan-400 shadow-[0_0_24px_rgba(34,211,238,0.85)]"
