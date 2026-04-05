@@ -57,7 +57,7 @@ export const Navbar = () => {
             className="inline-flex items-center gap-2.5 text-lg font-semibold tracking-tight text-white"
             aria-label="JobTrackr home"
           >
-            <img src={logo} alt="JobTrackr" className="h-8 w-auto" />
+            <img src={logo} alt="JobTrackr" className="h-9 w-auto" />
             <span className="font-display text-xl">JobTrackr</span>
             <motion.span
               aria-hidden="true"

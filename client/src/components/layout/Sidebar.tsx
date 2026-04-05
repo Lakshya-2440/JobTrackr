@@ -52,7 +52,10 @@ export const Sidebar = () => {
         )}
       >
         <div className="flex items-center justify-between">
-          <img src={logo} alt="JobTrackr" className="h-10 w-auto" />
+          <div className="flex items-center gap-2.5">
+            <img src={logo} alt="JobTrackr" className="h-9 w-auto" />
+            <span className="font-display text-lg text-white">JobTrackr</span>
+          </div>
           <button
             type="button"
             onClick={closeSidebar}

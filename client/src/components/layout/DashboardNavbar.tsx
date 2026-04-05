@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Menu, Plus, Search } from 'lucide-react';
+import logo from '@/assets/logo.svg';
 import { Button } from '@/components/ui/Button';
 import { useDebounce } from '@/hooks/useDebounce';
 import { useJobStore } from '@/store/jobStore';
@@ -37,7 +38,11 @@ export const DashboardNavbar = ({ title }: NavbarProps) => {
           >
             <Menu className="h-5 w-5" />
           </button>
-          <div>
+          <div className="flex flex-col gap-1">
+            <div className="flex items-center gap-2.5">
+              <img src={logo} alt="JobTrackr" className="h-9 w-auto" />
+              <span className="font-display text-lg text-white">JobTrackr</span>
+            </div>
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-400">
               Job Search Command Center
             </p>
