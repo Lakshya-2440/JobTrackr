@@ -29,6 +29,7 @@ model User {
   password  String
   avatar    String?
   jobs      Job[]
+  assistantDocuments AssistantDocument[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -37,6 +38,7 @@ model Job {
   id             String    @id @default(uuid())
   userId         String
   user           User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  assistantDocument AssistantDocument?
   company        String
   position       String
   status         JobStatus @default(WISHLIST)
@@ -68,5 +70,23 @@ model Contact {
   role  String?
   email String?
   phone String?
+}
+
+model AssistantDocument {
+  id          String    @id @default(uuid())
+  userId      String
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  jobId       String    @unique
+  job         Job       @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  title       String
+  content     String
+  contentHash String
+  status      JobStatus
+  priority    Priority
+  embedding   Float[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([userId])
 }
 

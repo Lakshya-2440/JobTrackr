@@ -7,6 +7,7 @@ import morgan from 'morgan';
 import { clientOrigins, env } from './config/env';
 import { prisma } from './config/prisma';
 import { errorHandler } from './middleware/error.middleware';
+import assistantRoutes from './routes/assistant.routes';
 import authRoutes from './routes/auth.routes';
 import jobRoutes from './routes/job.routes';
 import uploadRoutes from './routes/upload.routes';
@@ -60,6 +61,7 @@ app.get('/api/health', (_req, res) => {
 });
 
 app.use('/api/auth', authLimiter, authRoutes);
+app.use('/api/assistant', assistantRoutes);
 app.use('/api/jobs', jobRoutes);
 app.use('/api/upload', uploadRoutes);
 

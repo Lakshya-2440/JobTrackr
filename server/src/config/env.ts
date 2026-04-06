@@ -18,6 +18,10 @@ const envSchema = z.object({
   CLOUDINARY_CLOUD_NAME: z.string().min(1, 'CLOUDINARY_CLOUD_NAME is required'),
   CLOUDINARY_API_KEY: z.string().min(1, 'CLOUDINARY_API_KEY is required'),
   CLOUDINARY_API_SECRET: z.string().min(1, 'CLOUDINARY_API_SECRET is required'),
+  OPENAI_API_KEY: z.string().optional(),
+  OPENAI_CHAT_MODEL: z.string().default('gpt-4o-mini'),
+  OPENAI_EMBEDDING_MODEL: z.string().default('text-embedding-3-small'),
+  RAG_TOP_K: z.coerce.number().int().positive().max(10).default(5),
   CLIENT_URL: z
     .string()
     .min(1)

@@ -72,6 +72,21 @@ export interface AnalyticsSummary {
   responseRate: number;
 }
 
+export interface AssistantSource {
+  jobId: string;
+  company: string;
+  position: string;
+  status: JobStatus;
+  priority: Priority;
+  score: number;
+}
+
+export interface AssistantResponse {
+  answer: string;
+  mode: 'rag' | 'fallback';
+  sources: AssistantSource[];
+}
+
 export interface AuthResponse {
   user: IUser;
   accessToken: string;

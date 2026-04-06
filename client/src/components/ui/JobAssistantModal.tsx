@@ -1,9 +1,12 @@
 import { FormEvent, useMemo, useState } from 'react';
+import { useMutation } from '@tanstack/react-query';
 import { Sparkles } from 'lucide-react';
+import { askAssistant } from '@/api/assistant.api';
 import { useJobs } from '@/hooks/useJobs';
 import { answerJobQuestion } from '@/utils/jobAssistant';
 import { Button } from '@/components/ui/Button';
 import { Modal } from '@/components/ui/Modal';
+import { AssistantResponse } from '@/types';
 
 interface JobAssistantModalProps {
   isOpen: boolean;
@@ -19,6 +22,8 @@ const SUGGESTED_QUESTIONS = [
 export const JobAssistantModal = ({ isOpen, onClose }: JobAssistantModalProps) => {
   const [question, setQuestion] = useState('');
   const [answer, setAnswer] = useState('');
+  const [sources, setSources] = useState<AssistantResponse['sources']>([]);
+  const [mode, setMode] = useState<AssistantResponse['mode']>('fallback');
 
   const jobsQuery = useJobs({
     sortBy: 'createdAt',
@@ -26,29 +31,54 @@ export const JobAssistantModal = ({ isOpen, onClose }: JobAssistantModalProps) =
     page: 1,
     limit: 100
   });
+  const assistantMutation = useMutation({
+    mutationFn: askAssistant
+  });
 
   const jobs = useMemo(() => jobsQuery.data?.jobs ?? [], [jobsQuery.data]);
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (jobsQuery.isError) {
       setAnswer('I could not load your applications right now. Please try again in a moment.');
+      setSources([]);
+      setMode('fallback');
       return;
     }
 
-    setAnswer(answerJobQuestion(question, jobs));
+    try {
+      const result = await assistantMutation.mutateAsync(question);
+      setAnswer(result.answer);
+      setSources(result.sources);
+      setMode(result.mode);
+    } catch {
+      setAnswer(answerJobQuestion(question, jobs));
+      setSources([]);
+      setMode('fallback');
+    }
   };
 
-  const applyQuestion = (value: string) => {
+  const applyQuestion = async (value: string) => {
     setQuestion(value);
 
     if (jobsQuery.isError) {
       setAnswer('I could not load your applications right now. Please try again in a moment.');
+      setSources([]);
+      setMode('fallback');
       return;
     }
 
-    setAnswer(answerJobQuestion(value, jobs));
+    try {
+      const result = await assistantMutation.mutateAsync(value);
+      setAnswer(result.answer);
+      setSources(result.sources);
+      setMode(result.mode);
+    } catch {
+      setAnswer(answerJobQuestion(value, jobs));
+      setSources([]);
+      setMode('fallback');
+    }
   };
 
   return (
@@ -56,7 +86,7 @@ export const JobAssistantModal = ({ isOpen, onClose }: JobAssistantModalProps) =
       <div className="space-y-4">
         <div className="rounded-2xl border border-slate-700 bg-slate-950/70 p-4">
           <p className="text-sm text-slate-300">
-            Ask about your applications by status/priority and get quick answers from your data.
+            Ask about your applications and get retrieval-backed answers from your own data.
           </p>
         </div>
 
@@ -67,7 +97,7 @@ export const JobAssistantModal = ({ isOpen, onClose }: JobAssistantModalProps) =
               type="button"
               variant="outline"
               size="sm"
-              onClick={() => applyQuestion(item)}
+              onClick={() => void applyQuestion(item)}
             >
               {item}
             </Button>
@@ -86,7 +116,11 @@ export const JobAssistantModal = ({ isOpen, onClose }: JobAssistantModalProps) =
             className="min-h-[110px] w-full rounded-xl border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-slate-100 outline-none transition focus:border-blue-400 focus:ring-2 focus:ring-blue-500/30"
           />
           <div className="flex items-center justify-end">
-            <Button type="submit" disabled={jobsQuery.isLoading || question.trim().length === 0}>
+            <Button
+              type="submit"
+              loading={assistantMutation.isPending || jobsQuery.isLoading}
+              disabled={jobsQuery.isLoading || question.trim().length === 0}
+            >
               <Sparkles className="h-4 w-4" />
               Ask Assistant
             </Button>
@@ -102,7 +136,33 @@ export const JobAssistantModal = ({ isOpen, onClose }: JobAssistantModalProps) =
               I could not load your applications right now. Please try again in a moment.
             </p>
           ) : answer ? (
-            <pre className="whitespace-pre-wrap font-sans text-sm text-slate-200">{answer}</pre>
+            <div className="space-y-4">
+              <pre className="whitespace-pre-wrap font-sans text-sm text-slate-200">{answer}</pre>
+              <div className="flex items-center gap-2 text-xs uppercase tracking-[0.16em] text-slate-500">
+                <span className="rounded-full border border-slate-700 px-2 py-1">{mode}</span>
+                <span>{sources.length} source(s)</span>
+              </div>
+              {sources.length > 0 && (
+                <div className="space-y-2 rounded-xl border border-slate-800 bg-slate-950 px-3 py-3 text-sm text-slate-300">
+                  <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
+                    Sources
+                  </p>
+                  {sources.map((source) => (
+                    <div key={source.jobId} className="flex flex-wrap items-center justify-between gap-2">
+                      <div>
+                        <p className="font-medium text-white">
+                          {source.company} · {source.position}
+                        </p>
+                        <p className="text-xs text-slate-500">
+                          {source.status} · {source.priority}
+                        </p>
+                      </div>
+                      <span className="text-xs text-slate-400">{source.score.toFixed(2)}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
           ) : (
             <p className="text-sm text-slate-400">Ask a question to see your summary here.</p>
           )}

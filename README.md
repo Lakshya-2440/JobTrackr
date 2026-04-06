@@ -1,6 +1,6 @@
 # JobTrackr
 
-A production-ready full-stack job application tracker built with React, Node.js, Express, Prisma, and Neon PostgreSQL. JobTrackr helps users manage a job search with a Kanban pipeline, secure authentication, resume uploads, reminders, and analytics for application progress.
+A production-ready full-stack job application tracker built with React, Node.js, Express, Prisma, and Neon PostgreSQL. JobTrackr helps users manage a job search with a Kanban pipeline, secure authentication, resume uploads, reminders, analytics for application progress, and a server-backed RAG assistant.
 
 ## Screenshots
 
@@ -83,6 +83,7 @@ Fill in:
 - `DIRECT_URL` with your Prisma migration connection string
 - `JWT_SECRET` and `JWT_REFRESH_SECRET`
 - `CLOUDINARY_*` credentials
+- `OPENAI_API_KEY` if you want the assistant to use embeddings and model answers instead of the local fallback
 
 The frontend Vite app is configured with `envDir: '..'`, so the root `.env` file is used by both the frontend and backend.
 
@@ -132,6 +133,10 @@ The repo ships with a root [`.env.example`](/Users/lakshyagupta/Desktop/job_trac
 | `CLOUDINARY_CLOUD_NAME` | Yes | Cloudinary cloud name |
 | `CLOUDINARY_API_KEY` | Yes | Cloudinary API key |
 | `CLOUDINARY_API_SECRET` | Yes | Cloudinary API secret |
+| `OPENAI_API_KEY` | No | Enables the RAG assistant |
+| `OPENAI_CHAT_MODEL` | No | Chat model for answer generation |
+| `OPENAI_EMBEDDING_MODEL` | No | Embedding model for retrieval |
+| `RAG_TOP_K` | No | Number of retrieved documents passed into the prompt |
 | `CLIENT_URL` | Yes | Allowed frontend origin for CORS |
 | `NODE_ENV` | Yes | Runtime environment |
 | `VITE_API_URL` | Optional | Frontend API base URL, defaults to `/api` |
@@ -209,6 +214,12 @@ All error responses use:
 | --- | --- | --- | --- |
 | `POST` | `/api/upload/resume` | Upload a resume to Cloudinary | Yes |
 
+### Assistant
+
+| Method | Endpoint | Description | Protected |
+| --- | --- | --- | --- |
+| `POST` | `/api/assistant/query` | Ask the RAG assistant a question about your applications | Yes |
+
 ## Folder Structure
 
 ```text
@@ -255,15 +266,58 @@ jobtrackr/
 
 ## Key Features
 
-- JWT auth with refresh-token cookies
-- Prisma + Neon PostgreSQL integration with pooled and direct URLs
-- Protected Express APIs with validation, rate limiting, and centralized errors
-- Drag-and-drop Kanban workflow for application stages
-- Basic in-app RAG assistant popup that answers application questions by status/priority
-- Resume upload pipeline using Multer and Cloudinary
-- Dashboard and analytics views with charts and response-rate insights
-- Zustand + React Query state management
-- Fully typed frontend and backend codebase
+### Authentication and Session Management
+
+- User registration and login
+- JWT access tokens with refresh-token cookie flow
+- Automatic token refresh in the frontend API client
+- Protected routes and protected backend endpoints
+
+### Job Application Tracking
+
+- Full CRUD for job applications
+- Rich job fields: company, position, status, priority, location, salary range/currency, job URL
+- Timeline fields: applied date and follow-up date
+- Notes, description, tags, and linked recruiter contacts
+- Server-side filtering, sorting, search, and pagination
+
+### Kanban Pipeline Workflow
+
+- Drag-and-drop board using application stages: WISHLIST, APPLIED, INTERVIEW, OFFER, REJECTED
+- Fast status updates via card movement
+- Slide-over and full-page detail views for each application
+
+### Resume and Document Handling
+
+- Resume upload endpoint with Multer memory storage
+- File type validation (PDF/DOC/DOCX) and file-size limits
+- Cloudinary storage integration for uploaded resumes
+
+### Analytics and Insights
+
+- Dashboard summary cards: total applications, active pipeline, interviews, offers
+- Analytics summary endpoint
+- Status distribution pie chart
+- Applications-over-time chart
+- Response-rate calculation and quick trend indicators
+
+### RAG Assistant (Implemented End to End)
+
+- Dedicated assistant API: `POST /api/assistant/query`
+- Per-job retrieval documents stored in Postgres via Prisma
+- Embedding generation for job documents and user queries
+- Similarity-based retrieval of top-K relevant records
+- LLM answer generation grounded in retrieved job context
+- Source list returned with relevance scores
+- Safe fallback mode when OpenAI key/model is unavailable, so core app behavior never breaks
+
+### Platform and Engineering Quality
+
+- Prisma + Neon PostgreSQL with managed migrations
+- Express middleware stack: Helmet, CORS, rate limiting, validation, centralized error handling
+- React + TypeScript frontend with TanStack Query and Zustand
+- Fully typed frontend/backend contracts
+- Production build validation for both server and client
 
 ## Deployment Notes
 

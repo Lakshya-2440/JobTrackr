@@ -5,6 +5,7 @@ import {
   JobFiltersQuery,
   UpdateJobInput
 } from '../schemas/job.schema';
+import { ragService } from './rag.service';
 import { ApiError } from '../utils/ApiError';
 
 interface MonthlyApplicationsRow {
@@ -91,33 +92,45 @@ export const jobService = {
   },
 
   async create(userId: string, data: CreateJobInput) {
-    return prisma.job.create({
+    const job = await prisma.job.create({
       data: {
         ...data,
         userId
       },
       include: jobInclude
     });
+
+    await ragService.upsertJobDocument(job.id);
+
+    return job;
   },
 
   async update(userId: string, jobId: string, data: UpdateJobInput) {
     await this.getById(userId, jobId);
 
-    return prisma.job.update({
+    const job = await prisma.job.update({
       where: { id: jobId },
       data,
       include: jobInclude
     });
+
+    await ragService.upsertJobDocument(job.id);
+
+    return job;
   },
 
   async updateStatus(userId: string, jobId: string, status: JobStatus) {
     await this.getById(userId, jobId);
 
-    return prisma.job.update({
+    const job = await prisma.job.update({
       where: { id: jobId },
       data: { status },
       include: jobInclude
     });
+
+    await ragService.upsertJobDocument(job.id);
+
+    return job;
   },
 
   async delete(userId: string, jobId: string) {
@@ -126,6 +139,8 @@ export const jobService = {
     await prisma.job.delete({
       where: { id: jobId }
     });
+
+    await ragService.deleteJobDocument(jobId);
 
     return { id: jobId };
   },
