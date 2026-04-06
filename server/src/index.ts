@@ -13,13 +13,27 @@ import uploadRoutes from './routes/upload.routes';
 import { ApiError } from './utils/ApiError';
 
 const app = express();
+const normalizeOrigin = (origin: string) => origin.replace(/\/$/, '');
+const allowedOrigins = new Set(clientOrigins.map(normalizeOrigin));
 
 app.set('trust proxy', 1);
 
 app.use(helmet());
 app.use(
   cors({
-    origin: clientOrigins.length === 1 ? clientOrigins[0] : clientOrigins,
+    origin: (origin, callback) => {
+      if (!origin) {
+        callback(null, true);
+        return;
+      }
+
+      if (allowedOrigins.has(normalizeOrigin(origin))) {
+        callback(null, true);
+        return;
+      }
+
+      callback(new Error('Not allowed by CORS'));
+    },
     credentials: true
   })
 );

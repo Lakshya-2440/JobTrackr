@@ -6,7 +6,9 @@ interface RetryableRequestConfig extends InternalAxiosRequestConfig {
   _retry?: boolean;
 }
 
-export const apiBaseUrl = import.meta.env.VITE_API_URL ?? '/api';
+export const apiBaseUrl =
+  import.meta.env.VITE_API_URL ??
+  (import.meta.env.PROD ? 'https://jobtrackr-api-8ei7.onrender.com/api' : '/api');
 
 const axiosInstance = axios.create({
   baseURL: apiBaseUrl,
