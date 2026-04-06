@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "https://jobtrackr-api-8ei7.onrender.com/api/$1"
+    }
+  ]
+}
