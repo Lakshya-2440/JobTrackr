@@ -301,7 +301,7 @@ jobtrackr/
 - Applications-over-time chart
 - Response-rate calculation and quick trend indicators
 
-### RAG Assistant (Implemented End to End)
+### RAG Assistant
 
 - Dedicated assistant API: `POST /api/assistant/query`
 - Per-job retrieval documents stored in Postgres via Prisma
