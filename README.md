@@ -125,7 +125,7 @@ The repo ships with a root [`.env.example`](/Users/lakshyagupta/Desktop/job_trac
 | --- | --- | --- |
 | `PORT` | Yes | Express server port |
 | `DATABASE_URL` | Yes | Neon pooled PostgreSQL connection string |
-| `DIRECT_URL` | Yes | Neon direct Prisma migration connection string |
+| `DIRECT_URL` | Optional | Neon direct Prisma migration connection string (recommended for Prisma migrations) |
 | `JWT_SECRET` | Yes | Access token secret, minimum 32 chars |
 | `JWT_EXPIRES_IN` | Yes | Access token lifetime, default `7d` |
 | `JWT_REFRESH_SECRET` | Yes | Refresh token secret, minimum 32 chars |
@@ -324,7 +324,8 @@ jobtrackr/
 ### Backend on Render
 
 - Create a new Web Service pointed at the `server/` directory
-- Set the build command to `npm install && npm run build`
+- Set the build command to `npm ci --include=dev && npx prisma generate && npm run build`
+- Set the pre-deploy command to `DIRECT_URL=${DIRECT_URL:-$DATABASE_URL} npx prisma migrate deploy`
 - Set the start command to `npm run start`
 - Add all environment variables from the root `.env`
 - Ensure Neon and Cloudinary credentials are configured in Render
